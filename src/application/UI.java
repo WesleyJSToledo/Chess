@@ -31,7 +31,7 @@ public class UI {
 		for(int i = 0; i < pieces.length; i++) {
 			System.out.print(Colors.ANSI_RED+" \t " + (8 - i) + "  ");
 			for(int j = 0; j < pieces[i].length; j++) {
-				printPiece(pieces[i][j], i + j);
+				printPiece(pieces[i][j], i + j, false);
 			}
 			System.out.print(Colors.ANSI_RED +" " + (8 - i) + "  \t" +Colors.ANSI_RESET);
 			
@@ -42,8 +42,29 @@ public class UI {
 
 	}
 	
-	private static void printPiece (ChessPiece piece, int i) {
-		
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		System.out.println(Colors.ANSI_RED + " \t    A B C D E F G H       \t" +Colors.ANSI_RESET);
+		System.out.println("\t                             \t");
+
+		for(int i = 0; i < pieces.length; i++) {
+			System.out.print(Colors.ANSI_RED+" \t " + (8 - i) + "  ");
+			for(int j = 0; j < pieces[i].length; j++) {
+				printPiece(pieces[i][j], i + j, possibleMoves[i][j]);
+			}
+			System.out.print(Colors.ANSI_RED +" " + (8 - i) + "  \t" +Colors.ANSI_RESET);
+			
+			System.out.println();
+		}
+		System.out.println("\t                             \t");
+		System.out.println(Colors.ANSI_RED + " \t    A B C D E F G H       \t" +Colors.ANSI_RESET);
+
+	}
+	
+	
+	private static void printPiece (ChessPiece piece, int i, boolean background) {
+		if (background) {
+			System.out.print(Colors.ANSI_BLUE_BACKGROUND);
+		}
 		if(piece == null) {
 			if(i % 2 == 0 ) {
 				System.out.print(Colors.ANSI_WHITE + "-" + Colors.ANSI_RESET) ;
@@ -52,9 +73,9 @@ public class UI {
 			}
 		} else {
 			if(piece.getColor() == Color.WHITE) {
-				System.out.print(Colors.ANSI_WHITE + piece);
+				System.out.print(Colors.ANSI_WHITE + piece + Colors.ANSI_RESET);
 			} else {
-				System.out.print(Colors.ANSI_YELLOW + piece);
+				System.out.print(Colors.ANSI_YELLOW + piece + Colors.ANSI_RESET);
 			}
 		}
 		System.out.print(" ");
