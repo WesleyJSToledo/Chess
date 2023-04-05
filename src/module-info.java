@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author WesleyToledo
- *
- */
-module Chess {
-}
